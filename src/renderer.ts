@@ -73,30 +73,4 @@ export function getRenderer(props?: { createRoot?: CreateRoot }): Renderer {
       }
     }
   }
-
-  // React 16-17 legacy path with ReactDOM.render
-  return {
-    mount: (element: React.ReactElement, container: HTMLElement) => {
-      const wrapper = getWrapper(container)
-
-      if ('render' in ReactDOM && typeof ReactDOM.render === 'function') {
-        const result = ReactDOM.render(element, wrapper) as React.Component | Element
-
-        return result || wrapper
-      }
-
-      throw new Error('ReactDOM.render is not available')
-    },
-    unmount: (container: HTMLElement) => {
-      const wrapper = getWrapper(container)
-
-      if ('unmountComponentAtNode' in ReactDOM && typeof ReactDOM.unmountComponentAtNode === 'function') {
-        ReactDOM.unmountComponentAtNode(wrapper)
-      } else {
-        throw new Error('ReactDOM.unmountComponentAtNode is not available')
-      }
-
-      removeWrapper(container)
-    }
-  }
 }
