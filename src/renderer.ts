@@ -73,4 +73,5 @@ export function getRenderer(props?: { createRoot?: CreateRoot }): Renderer {
       }
     }
   }
+  throw new Error('Only react 18+ is supported');
 }
